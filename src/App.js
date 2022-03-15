@@ -1,21 +1,25 @@
+import React from "react";
 import './App.css';
+import NavBar from './components/NavBar/NavBar';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#573391',
+    },
+    secondary: {
+      main: '#5902EC',
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <NavBar/>
+      </ThemeProvider>
     </div>
   );
 }
