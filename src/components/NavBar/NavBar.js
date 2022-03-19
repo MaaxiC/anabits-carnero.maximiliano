@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, alpha, useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -15,13 +15,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import HomeIcon from '@mui/icons-material/Home';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import InfoIcon from '@mui/icons-material/Info';
@@ -30,6 +27,8 @@ import Avatar from '@mui/material/Avatar';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import SearchWidget from '../SearchWidget/SearchWidget';
+import CartWidget from '../CartWidget/CartWidget';
 
 
 const drawerWidth = 240;
@@ -99,48 +98,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(5),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '40ch',
-    },
-  },
-}));
-
-
-function NavBar() {
+function NavBar({body}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -151,7 +109,6 @@ function NavBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -210,25 +167,10 @@ function NavBar() {
             Anabits
           </Typography>
           <img src="/logo-soundwaves.png" alt="img-logo" width="70px"/>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          <SearchWidget/>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton 
-              size="large" 
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <ShoppingCartCheckoutIcon />
-              </Badge>
-            </IconButton>
+            <CartWidget/>
             <IconButton
               size="large"
               color="inherit"
@@ -269,7 +211,7 @@ function NavBar() {
                   justifyContent: 'center',
                 }}
               >
-                {index == 0 ? <HomeIcon /> : index == 1 ? <InventoryIcon /> : index == 2 ? <FavoriteIcon /> : <LocalOfferIcon />}
+                {index === 0 ? <HomeIcon /> : index === 1 ? <InventoryIcon /> : index === 2 ? <FavoriteIcon /> : <LocalOfferIcon />}
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -293,7 +235,7 @@ function NavBar() {
                   justifyContent: 'center',
                 }}
               >
-                {index == 0 ? <InfoIcon /> : <ContactPageIcon />}
+                {index === 0 ? <InfoIcon /> : <ContactPageIcon />}
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -323,7 +265,7 @@ function NavBar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        
+        {body}
       </Box>
       {renderMenu}
     </Box>

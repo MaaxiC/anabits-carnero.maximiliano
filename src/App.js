@@ -1,7 +1,10 @@
 import React from "react";
 import './App.css';
 import NavBar from './components/NavBar/NavBar';
+import CartWidget from './components/CartWidget/CartWidget';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 const theme = createTheme({
   palette: {
@@ -18,7 +21,9 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <NavBar/>
+        <NavBar body={<ItemListContainer/>}>
+          <CartWidget/>
+        </NavBar>
       </ThemeProvider>
     </div>
   );

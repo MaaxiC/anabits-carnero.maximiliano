@@ -1,0 +1,8 @@
+.ItemList-Title {
+    margin-bottom: 10px;
+}
+
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
