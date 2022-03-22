@@ -4,44 +4,43 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import '../CardProduct/CardProduct.css';
+import ItemCount from '../ItemCount/ItemCount';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+
 
 const CardProduct = (props) => {
-  const {product, price, date, image, alt} = props
+  const {product, price, image, alt, stock, setProducts} = props
+
+  const onAdd = (count, setCount) => {
+    alert(`Agregaste ${count} productos`);
+    setCount(1);
+  }
   
   return (
-    <Card sx={{ maxWidth: 320, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, ':hover': {boxShadow: 20} }} >
+    <Card sx={{ width: 320, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, ':hover': {boxShadow: 20} }} >
       <CardHeader
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
         }
         title={product}
-        subheader={date}
+        subheader={price}
       />
       <CardMedia
-        component="img"
-        height="300"
+        component='img'
+        height='300'
         image={image}
         alt={alt}
       />
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label='share'>
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="buy">
-          <AddShoppingCartIcon />
-        </IconButton>
         <div className='card-price'>
-          Price: {price}
+           <ItemCount stock={stock} initial={1} onAdd={onAdd} setProducts={setProducts} />
         </div>
       </CardActions>
     </Card>
@@ -49,4 +48,3 @@ const CardProduct = (props) => {
 }
 
 export default CardProduct;
-

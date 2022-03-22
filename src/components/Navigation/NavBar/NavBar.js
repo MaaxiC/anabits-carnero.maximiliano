@@ -29,7 +29,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import CartWidget from '../CartWidget/CartWidget';
-
+import ItemListContainer from '../../ItemListContainer/ItemListContainer'
 
 const drawerWidth = 240;
 
@@ -98,7 +98,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-function NavBar({body}) {
+function NavBar() {
+  const [products, setProducts] = React.useState(0);
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -149,13 +151,13 @@ function NavBar({body}) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position='fixed' open={open}>
         <Toolbar>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
+            color='inherit'
+            aria-label='open drawer'
             onClick={handleDrawerOpen}
-            edge="start"
+            edge='start'
             sx={{
               marginRight: 5,
               ...(open && { display: 'none' }),
@@ -163,31 +165,31 @@ function NavBar({body}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" margin= '15px'>
+          <Typography variant='h6' noWrap component='div' margin= '15px'>
             Anabits
           </Typography>
-          <img src="/logo-soundwaves.png" alt="img-logo" width="70px"/>
+          <img src='/logo-soundwaves.png' alt='img-logo' width='70px'/>
           <SearchWidget/>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <CartWidget/>
+            <CartWidget products={products} />
             <IconButton
-              size="large"
-              color="inherit"
+              size='large'
+              color='inherit'
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={0} color='error'>
                 <NotificationsIcon />
               </Badge>
             </IconButton>
             <IconButton
               onClick={handleProfileMenuOpen}
             >   
-              <Avatar src="/profile.jpg" alt="avatar" />
+              <Avatar src='/profile.jpg' alt='avatar' />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant='permanent' open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -265,7 +267,7 @@ function NavBar({body}) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        {body}
+        <ItemListContainer setProducts={setProducts}/>
       </Box>
       {renderMenu}
     </Box>
