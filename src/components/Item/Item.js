@@ -5,15 +5,15 @@ import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import ShareIcon from '@mui/icons-material/Share';
-import '../CardProduct/CardProduct.css';
+import './Item.css';
 import ItemCount from '../ItemCount/ItemCount';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 
 
-const CardProduct = (props) => {
-  const {product, price, image, alt, stock, setProducts} = props
+const Item = ({product}) => {
+  const {title, price, image, alt, stock} = product
 
   const onAdd = (count, setCount) => {
     alert(`Agregaste ${count} productos`);
@@ -26,7 +26,7 @@ const CardProduct = (props) => {
         action={
           <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
         }
-        title={product}
+        title={title}
         subheader={price}
       />
       <CardMedia
@@ -40,11 +40,11 @@ const CardProduct = (props) => {
           <ShareIcon />
         </IconButton>
         <div className='card-price'>
-           <ItemCount stock={stock} initial={1} onAdd={onAdd} setProducts={setProducts} />
+           <ItemCount stock={stock} initial={1} onAdd={onAdd} />
         </div>
       </CardActions>
     </Card>
   );
 }
 
-export default CardProduct;
+export default Item;

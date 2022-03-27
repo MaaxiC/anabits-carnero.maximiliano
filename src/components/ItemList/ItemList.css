@@ -6,3 +6,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.progress {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}

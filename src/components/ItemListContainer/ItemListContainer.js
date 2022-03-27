@@ -1,18 +1,31 @@
-import * as React from 'react';
-import CardProduct from '../CardProduct/CardProduct';
-import '../ItemListContainer/ItemListContainer.css';
+import React from 'react';
+import ItemList from '../ItemList/ItemList';
 
-const ItemListContainer = ({setProducts}) => {
+
+const ItemListContainer = () => {
+  const mockItems = [{
+    id: 1,
+    title: 'Headphone AKG K92',
+    price: 'US$ 65',
+    image: '../headphone.png',
+    alt: 'headphone',
+    stock: 5,
+    },
+    {
+    id: 2,
+    title: 'Audio-Technica AT2020',
+    price: 'US$ 100',
+    image: '../microphone.jpg',
+    alt: 'microphone',
+    stock: 7,
+    }]
 
   return (
     <div>
       <h2 className='ItemList-Title' >Products Offers</h2>
-      <div className='container-cards' >
-        <CardProduct product={'Headphone AKG K92'} price={'US$ 65'} image={'../headphone.png'} alt={'headphone'} stock={5} setProducts={setProducts} />
-        <CardProduct product={'Audio-Technica AT2020'} price={'US$ 100'} image={'../microphone.jpg'} alt={'microphone'} stock={7} setProducts={setProducts} />
-      </div>
+      <ItemList products= {mockItems}/>
     </div>
-  );
+  )
 }
 
 export default ItemListContainer;

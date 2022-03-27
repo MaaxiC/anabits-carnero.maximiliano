@@ -10,7 +10,7 @@ import '../ItemCount/ItemCount.css';
 import IconButton from '@mui/material/IconButton';
 import Notification from '../Notification/Notification'
 
-const ItemCount = ({stock, initial, onAdd, setProducts}) => {
+const ItemCount = ({stock, initial, onAdd}) => {
     const [count, setCount] = useState(1);
 
     const [open, setOpen] = React.useState(false);
@@ -30,13 +30,6 @@ const ItemCount = ({stock, initial, onAdd, setProducts}) => {
     const Alert = () => {
         handleClick();
         onAdd(count, setCount);
-        productsHandler(count);
-    }
-
-    const productsHandler = (count) => {
-
-        setProducts(count);
-        
     }
 
     return (

@@ -99,8 +99,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function NavBar() {
-  const [products, setProducts] = React.useState(0);
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -172,7 +170,7 @@ function NavBar() {
           <SearchWidget/>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <CartWidget products={products} />
+            <CartWidget/>
             <IconButton
               size='large'
               color='inherit'
@@ -267,7 +265,7 @@ function NavBar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <ItemListContainer setProducts={setProducts}/>
+        <ItemListContainer />
       </Box>
       {renderMenu}
     </Box>
