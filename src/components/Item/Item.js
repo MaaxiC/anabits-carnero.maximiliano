@@ -25,8 +25,7 @@ const Item = ({product, loading}) => {
   return (
     <Card 
       sx={{ maxWidth: 300, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, 
-        ':hover': {boxShadow: 20, cursor: "pointer"} }} 
-        onClick={() => openItemDetail() } >
+        ':hover': {boxShadow: 20, cursor: "pointer"} }} >
       <CardHeader
         action={
           loading ? (null) : (
@@ -61,6 +60,7 @@ const Item = ({product, loading}) => {
         height="250"
         image={product.image}
         alt={product.alt}
+        onClick={() => openItemDetail() } 
       />
       )}
       {loading ? (null) : (
