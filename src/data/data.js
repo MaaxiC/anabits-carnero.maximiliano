@@ -5,6 +5,7 @@ export const mockItems = [{
     price: 'US$ 110',
     image: 'https://m.media-amazon.com/images/I/61Kq-Pz8d-L._AC_SX466_.jpg',
     alt: 'JBL Live 460NC',
+    description: 'The JBL Live 460NC wireless headphones feature 40mm drivers and a sound signature that can be found in the most famous venues all around the world.',
     stock: 5,
   },
   {
@@ -13,6 +14,7 @@ export const mockItems = [{
     price: 'US$ 100',
     image: 'https://m.media-amazon.com/images/I/61D4bfBMuwL._AC_SX679_.jpg',
     alt: 'Shure SM58LC',
+    description: 'Frequency response tailored for vocals, with brightened midrange and bass rolloff to control proximity effect.',
     stock: 7,
   },
   {
@@ -21,6 +23,7 @@ export const mockItems = [{
     price: 'US$ 280',
     image: 'https://m.media-amazon.com/images/I/51CHPyFpnoL._AC_SX466_.jpg',
     alt: 'Bose QuietComfort',
+    description: 'The perfect balance of quiet, comfort, and sound. Bose uses tiny mics to measure, compare, and react to outside noise, cancelling it with opposite signals.',
     stock: 3,
   },
   {
@@ -29,6 +32,7 @@ export const mockItems = [{
     price: 'US$ 130',
     image: 'https://m.media-amazon.com/images/I/71KnRgLZppL._AC_SX679_.jpg',
     alt: 'PreSonus Eris E3.5',
+    description: 'The only true studio monitor for multimedia, gaming, watching movies, or producing your next hit.',
     stock: 4,
   },
   {
@@ -37,6 +41,7 @@ export const mockItems = [{
     price: 'US$ 1500',
     image: 'https://m.media-amazon.com/images/I/8131itHIpbL._AC_SX679_.jpg',
     alt: 'Denon DJ PRIME 2',
+    description: 'Ditch The DJ Controller, Discover the Power of PRIME: Full-featured, ultra portable 2 deck smart DJ console with 7 inch HD gesture controlled touchscreen powered by Denon OS.',
     stock: 2,
   },
   {
@@ -45,6 +50,7 @@ export const mockItems = [{
     price: 'US$ 170',
     image: 'https://m.media-amazon.com/images/I/816LW+MMNEL._AC_SX679_.jpg',
     alt: 'Mackie ProFXv3',
+    description: 'Mackie Mixer USB 2X4 192KHZ.',
     stock: 10,
   },
   {
@@ -53,6 +59,7 @@ export const mockItems = [{
     price: 'US$ 378',
     image: 'https://m.media-amazon.com/images/I/91QmxGNkxWL._AC_SX679_.jpg',
     alt: 'KRK RP5 Rokit 5',
+    description: 'Professional grade 5“ (bi-amp) studio monitor designed and engineered in the USA.',
     stock: 5,
   },
   {
@@ -61,6 +68,7 @@ export const mockItems = [{
     price: 'US$ 270',
     image: 'https://m.media-amazon.com/images/I/51wIU3zDvwS._AC_SX466_.jpg',
     alt: 'Audioengine A2+',
+    description: 'The award-winning A2+ Wireless Speakers provide detailed, true stereo sound and can easily connect to all your music in seconds.',
     stock: 3,
   },
 ]

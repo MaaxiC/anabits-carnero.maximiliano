@@ -12,40 +12,34 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
 const ItemDetail = ({item}) => {
-    const {title, price, image, alt, stock}  = item
+    const {title, price, image, alt, stock, description}  = item
 
     return (
     <div className='card-container'>
       <Card 
-        sx={{ minWidth: 1100, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, }} className={'card'} >
-      <div className='card-header'>
-        <CardMedia
-          component="img"
-          image={image}
-          alt={alt}
-        />
-        <div className='card-description'>
-        <CardHeader
-          action={
-            <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-          }
-          title={
-            title
-          }
-          subheader={
-            price
-          }
-        />
-        <CardContent>
-        <Typography variant="body2" color="text.secondary" component="p">
-            {
-              "Ditch The DJ Controller, Discover the Power of PRIME: Full-featured, ultra portable 2 deck smart DJ console with 7 inch HD gesture controlled touchscreen powered by Denon DJ’s ENGINE OS"
-            }
-          </Typography>
-          </CardContent>
-        <CardActions sx={{  marginLeft: -5, marginRight: 5 }}> 
-          <ItemCount stock={stock} initial={1}/>
-        </CardActions>
+        sx={{ minWidth: 1100, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, }} >
+        <div className='card-header'>
+          <CardMedia
+            component="img"
+            image={image}
+            alt={alt}
+          />
+          <div className='card-description'>
+            <CardHeader
+              action={
+                <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+              }
+              title={title}
+              subheader={price}
+            />
+            <CardContent>
+              <Typography variant="body2" color="text.secondary" component="p">
+                {description}
+              </Typography>
+            </CardContent>
+            <CardActions sx={{  marginLeft: -5, marginRight: 5 }} > 
+              <ItemCount stock={stock} initial={1} />
+            </CardActions>
           </div>
         </div>
       </Card>

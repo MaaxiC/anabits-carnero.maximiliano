@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
     const getDetail = async () => {
         setLoading(false);
         return new Promise((resolve, reject) => {
-            return resolve(mockItems[3]);
+            return resolve(mockItems[4]);
         });
     }
 
