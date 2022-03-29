@@ -30,6 +30,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import CartWidget from '../CartWidget/CartWidget';
 import ItemListContainer from '../../ItemListContainer/ItemListContainer'
+import ItemDetailContainer from '../../ItemDetailContainer/ItemDetailContainer';
 
 const drawerWidth = 240;
 
@@ -266,6 +267,7 @@ function NavBar() {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <ItemListContainer />
+        <ItemDetailContainer />
       </Box>
       {renderMenu}
     </Box>

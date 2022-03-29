@@ -1,44 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import Item from '../Item/Item';
 import '../ItemList/ItemList.css';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { mockItems } from '../../data/data';
 
 
-const ItemList = ({products}) => {
+const ItemList = () => {
     const [loading, setLoading] = useState(false)
 
     const [items, setItems] = useState([])
   
     const getItems = () => {
-        setLoading(false)
+        setLoading(false);
         return new Promise((resolve, reject) => {
-  
-            return resolve(products)
-
-        })
+            return resolve(mockItems);
+        });
     }
   
     useEffect( () => {
-        setLoading(true)
+        setLoading(true);
         setTimeout(() => {
             getItems().then( (data) => {
-                setItems(data)
+                setItems(data);
             })
-        }, 2000)
+        }, 2000);
     }, [])
   
     return (
         <div className='container-cards'>
             { loading ? (
-                <div className='progress'>
-                    <CircularProgress />
-                </div>
+                mockItems.map( (item, i) => {
+                    return (
+                        <Item key={i} loading={loading}/> 
+                    )}) 
             ) : (
                 items.map( (item) => {
                     const {id} = item
                     return (
-                        <Item product={item} key={id} /> 
+                        <Item product={item} key={id} loading={loading}/> 
                     )}) 
                 )
             }    
@@ -47,4 +45,3 @@ const ItemList = ({products}) => {
 }
   
 export default ItemList;
-
