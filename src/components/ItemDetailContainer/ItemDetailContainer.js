@@ -2,25 +2,36 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import CircularProgress from '@mui/material/CircularProgress';
-import { mockItems } from '../../data/data';
+import { mockItems } from '../../data/Data';
 import Backdrop from '@mui/material/Backdrop';
+import '../ItemDetailContainer/ItemDetailContainer.css';
+import { useParams } from 'react-router-dom';
 
 const ItemDetailContainer = () => {
-    const [detail, setDetail] = useState([]);
+    const { id } = useParams();
+    const [detail, setDetail] = useState({});
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
+  
+    const filterProductById = (array, id) => {
+        return array.filter( (product) => {
+            if( product.id === id ) {
+                return setDetail(product);
+            }
+        })
+    }
 
     const handleClose = () => {
         setOpen(false);
-      };
-      const handleToggle = () => {
+    };
+    const handleToggle = () => {
         setOpen(!open);
-      };
+    };
 
     const getDetail = async () => {
         setLoading(false);
         return new Promise((resolve, reject) => {
-            return resolve(mockItems[4]);
+            return resolve(mockItems);
         });
     }
 
@@ -29,13 +40,13 @@ const ItemDetailContainer = () => {
         handleToggle();
         setTimeout(() => {
             getDetail().then( (data) => {
-                setDetail(data);
+                filterProductById(data, id);
             })
-        }, 2000);
-    }, [])
+        }, 1000);
+    }, [id])
     
     return (
-        <div>
+        <div className='container-detail' >
             {loading ? (
                     <Backdrop
                         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}

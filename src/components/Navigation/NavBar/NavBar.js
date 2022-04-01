@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -24,15 +25,44 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import Avatar from '@mui/material/Avatar';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import CartWidget from '../CartWidget/CartWidget';
-import ItemListContainer from '../../ItemListContainer/ItemListContainer'
-import ItemDetailContainer from '../../ItemDetailContainer/ItemDetailContainer';
+import { Link } from 'react-router-dom';
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import MicIcon from '@mui/icons-material/Mic';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import SpeakerIcon from '@mui/icons-material/Speaker';
+
 
 const drawerWidth = 240;
+
+const pages = [
+  {
+    title: 'Home',
+    url: '/'
+  },
+  {
+    title: 'Favorites',
+    url: '/favorites'
+  },
+  {
+    title: 'Category',
+    url: '/category/'
+  },
+  {
+    title: 'AboutUs',
+    url: '/aboutus'
+  },
+  {
+    title: 'Contact',
+    url: '/contact'
+  }
+]
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -100,6 +130,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function NavBar() {
+  const [subMenu, setSubMenu] = useState(true);
+
+  const handleClick = () => {
+    setSubMenu(!subMenu);
+  };
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -164,7 +200,7 @@ function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap component='div' margin= '15px'>
+          <Typography variant='h5' noWrap component={Link} to={'/'} color='white' sx={{ marginRight: 4, textDecoration: 'none' }} >
             Anabits
           </Typography>
           <img src='/logo-soundwaves.png' alt='img-logo' width='70px'/>
@@ -196,8 +232,10 @@ function NavBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Home', 'Products', 'Favorites', 'Sales'].map((text, index) => (
+          {['Home', 'Favorites'].map((text, index) => (
             <ListItemButton
+              component={Link} 
+              to={pages[index].url}
               key={text}
               sx={{
                 minHeight: 48,
@@ -212,7 +250,7 @@ function NavBar() {
                   justifyContent: 'center',
                 }}
               >
-                {index === 0 ? <HomeIcon /> : index === 1 ? <InventoryIcon /> : index === 2 ? <FavoriteIcon /> : <LocalOfferIcon />}
+                {index === 0 ? <HomeIcon/> : <FavoriteIcon /> }
               </ListItemIcon>
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -220,8 +258,71 @@ function NavBar() {
         </List>
         <Divider />
         <List>
+          <ListItemButton 
+          sx={{
+            minHeight: 48,
+            justifyContent: 'initial',
+            px: 2.5,
+          }}
+          onClick={handleClick}
+          >
+            <ListItemIcon>
+              <InventoryIcon />
+            </ListItemIcon>
+          <ListItemText primary="Category" />
+          {subMenu ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={subMenu} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton 
+                sx={{ pl: 2.5 }}
+                component={Link} 
+                to={'/headphones'}
+                >
+                <ListItemIcon>
+                  <HeadphonesIcon />
+                </ListItemIcon>
+                <ListItemText primary="Headphones" />
+              </ListItemButton>
+              <ListItemButton 
+                sx={{ pl: 2.5 }}
+                component={Link} 
+                to={'/microphones'}
+                >
+                <ListItemIcon>
+                  <MicIcon />
+                </ListItemIcon>
+                <ListItemText primary="Microphones" />
+              </ListItemButton>
+              <ListItemButton 
+                sx={{ pl: 2.5 }}
+                component={Link} 
+                to={'/dj-consoles'}
+                >
+                <ListItemIcon>
+                  <MusicNoteIcon />
+                </ListItemIcon>
+                <ListItemText primary="DJ Consoles" />
+              </ListItemButton>
+              <ListItemButton 
+                sx={{ pl: 2.5 }}
+                component={Link} 
+                to={'/speakers'}
+                >
+                <ListItemIcon>
+                  <SpeakerIcon />
+                </ListItemIcon>
+                <ListItemText primary="Speakers" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+        </List>
+        <Divider />
+        <List>
           {['About Us', 'Contact'].map((text, index) => (
             <ListItemButton
+              component={Link} 
+              to={pages[index+3].url}
               key={text}
               sx={{
                 minHeight: 48,
@@ -264,10 +365,8 @@ function NavBar() {
           </ListItemButton>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
         <DrawerHeader />
-        <ItemListContainer />
-        <ItemDetailContainer />
       </Box>
       {renderMenu}
     </Box>
