@@ -16,6 +16,7 @@ import { useState } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 
 const ItemDetail = ({item}) => {
@@ -42,19 +43,23 @@ const ItemDetail = ({item}) => {
               action={
                 <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
               }
-              title={title}
+              title= {title}
               subheader={<Rating defaultValue={3.5} precision={0.5} />}
             />
-            <h3 className='price'>{price}</h3>
+            <h3 className='price'>{`US$ ${price}`}</h3>
             <CardContent>
               <Typography variant="body2" color="text.secondary" component="p">
                 {description}
               </Typography>
             </CardContent>
+            <div className='card'>
+              <CreditCardIcon sx={{ marginLeft: 3, marginRight: 3,  color: '#573391' }}  />
+              Credit Card payment accepted
+            </div>
             <CardActions sx={{  marginLeft: -4, marginRight: 5 }} > 
               <LocalShippingIcon sx={{ marginLeft: 6, marginRight: 3,  color: '#573391' }} />
               Free Shipping
-              <ItemCount stock={stock} initial={1} onAdd={onAdd}/>
+              {hidden ? <Button variant="contained" sx={{ marginLeft: 4, marginRight: -1 }} component={Link} to={'/cart'}>Go to Cart</Button> : <ItemCount stock={stock} initial={1} onAdd={onAdd}/> }
             </CardActions>
           </div>
         </div>

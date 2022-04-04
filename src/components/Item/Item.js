@@ -45,7 +45,7 @@ const Item = ({product, loading}) => {
           loading ? (
             <Skeleton animation="wave" height={15} width="25%" />
           ) : (
-          product.price
+            'US$ ' + product.price
           )
         }
       />
