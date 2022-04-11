@@ -60,6 +60,7 @@ function CartWidget() {
                                     <div>
                                         <ListItemText style={{ textAlign: "right" }}>{cartProduct.title}</ListItemText>
                                         <ListItemText style={{ textAlign: "right" }}>{`US$ ${cartProduct.price}`}</ListItemText>
+                                        <ListItemText style={{ textAlign: "right" }}>{`Quantity: ${cartProduct.quantity}`}</ListItemText>
                                     </div>
                                     <div>
                                         <IconButton 

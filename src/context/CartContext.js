@@ -20,9 +20,17 @@ const CartProvider = ({children}) => {
         setOpen(true);
     };
 
-    const addProductToCart = (product) => {
+    const addProductToCart = (product, count) => {
         let exist = cartProducts.find(cartProduct => cartProduct.id === product.id)
-        !exist && setCartProducts(cartProducts => [...cartProducts, product]);
+        let array = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+            alt:  product.alt,
+            quantity: count,
+        };
+        !exist && setCartProducts(cartProducts => [...cartProducts, array]);
         !exist && handleClick();
         !exist && calculeTotalPrice(product.price)
     }    

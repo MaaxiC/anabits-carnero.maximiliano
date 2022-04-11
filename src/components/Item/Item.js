@@ -24,7 +24,7 @@ const Item = ({product, loading}) => {
   const { theme } = useContext(ThemeContext);
 
   const onAdd = (count) => {
-    addProductToCart(product);
+    addProductToCart(product, count);
   }
 
   return (
