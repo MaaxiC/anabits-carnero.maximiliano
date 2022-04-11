@@ -21,7 +21,7 @@ import ListItemText from '@mui/material/ListItemText';
 function CartWidget() {
     const { theme } = useContext(ThemeContext);
 
-    const { cartProducts, removeProduct, total } = useContext(CartContext)
+    const { cartProducts, removeProduct, total, numItems } = useContext(CartContext)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -102,7 +102,7 @@ function CartWidget() {
                 color='inherit'
                 onClick={handleClick}
             >
-                <Badge badgeContent={cartProducts.length} color='error'>
+                <Badge badgeContent={numItems} color='error'>
                     <ShoppingCartIcon/>
                 </Badge>
             </IconButton>

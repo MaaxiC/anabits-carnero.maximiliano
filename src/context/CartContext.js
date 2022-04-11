@@ -8,6 +8,7 @@ const CartProvider = ({children}) => {
     const [cartProducts, setCartProducts] = useState([]);
     const [open, setOpen] = useState(false);
     const [total, setTotal] = useState(0);
+    const [numItems, setNumItems] = useState(0);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -21,7 +22,7 @@ const CartProvider = ({children}) => {
     };
 
     const addProductToCart = (product, count) => {
-        let exist = cartProducts.find(cartProduct => cartProduct.id === product.id)
+        let exist = cartProducts.find(cartProduct => cartProduct.id === product.id);
         let array = {
             id: product.id,
             title: product.title,
@@ -31,23 +32,27 @@ const CartProvider = ({children}) => {
             quantity: count,
         };
         !exist && setCartProducts(cartProducts => [...cartProducts, array]);
+        !exist && setNumItems(numItems + array.quantity);
         !exist && handleClick();
-        !exist && calculeTotalPrice(product.price)
+        !exist && calculeTotalPrice(array.price, array.quantity);
     }    
 
     const removeProduct = (product) => {
-        setCartProducts(cartProducts.filter( cartProduct => cartProduct.id !== product.id))
+        setTotal(total - (product.price * product.quantity));
+        setNumItems(numItems - product.quantity);
+        setCartProducts(cartProducts.filter( cartProduct => cartProduct.id !== product.id));
     }
 
-    const calculeTotalPrice = (price) => {
-        setTotal(total + price);
+    const calculeTotalPrice = (unitPrice, units) => {
+        setTotal(total + (unitPrice * units));
     }
 
     const data = {
         cartProducts,
         addProductToCart,
         total,
-        removeProduct
+        removeProduct,
+        numItems
     }
 
     return (

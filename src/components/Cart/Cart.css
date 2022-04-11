@@ -1,0 +1,11 @@
+.emptycart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buynow {
+    display: flex;
+    justify-content: right;
+}
