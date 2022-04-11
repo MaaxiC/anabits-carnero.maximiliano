@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,17 +13,39 @@ import Favorite from '@mui/icons-material/Favorite';
 import Skeleton from '@mui/material/Skeleton';
 import { Link } from 'react-router-dom';
 import CardContent from '@mui/material/CardContent';
+import CartContext from '../../context/CartContext';
+import ThemeContext from '../../context/ThemeContext';
+import { ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
 
 const Item = ({product, loading}) => {
-  const onAdd = (count, setCount) => {
-    alert(`Agregaste ${count} productos`);
-    setCount(1);
+  const { cartProducts, addProductToCart } = useContext(CartContext);
+  const { theme } = useContext(ThemeContext);
+
+  const onAdd = (count) => {
+    addProductToCart(product);
   }
-  
+
   return (
+    <ThemeProvider theme={theme}>
     <Card 
-      sx={{ maxWidth: 300, border: 1, borderRadius: 5, margin: 2, boxShadow: 5, 
+      sx={{ maxWidth: 310, borderRadius: 3, margin: 2, boxShadow: 5, 
         ':hover': {boxShadow: 20} }} >
+      
+      {loading ? (
+        <Skeleton sx={{ height: 240, marginTop: 4, marginBottom: 3, width: 300 }} animation="wave" variant="rectangular" />
+      ) : (
+      <CardContent component={Link} to={`/${product.category}/${product.id}`} >
+        <CardMedia
+          component="img"
+          height="250"
+          image={product.image}
+          alt={product.alt}
+          sx={{ paddingLeft: 1, paddingRight: 1  }}
+        />
+      </CardContent>
+      )}
       <CardHeader
         action={
           loading ? (null) : (
@@ -43,34 +66,26 @@ const Item = ({product, loading}) => {
         }
         subheader={
           loading ? (
-            <Skeleton animation="wave" height={15} width="25%" />
+            <Skeleton animation="wave" height={15} width="25%" style={{ marginBottom: 60}}/>
           ) : (
             'US$ ' + product.price
           )
         }
       />
-      {loading ? (
-        <Skeleton sx={{ height: 240, marginTop: 4, marginBottom: 10, width: 300 }} animation="wave" variant="rectangular" />
-      ) : (
-      <CardContent component={Link} to={`/${product.category}/${product.id}`} >
-        <CardMedia
-          component="img"
-          height="250"
-          image={product.image}
-          alt={product.alt}
-          sx={{ padding: 1 }}
-        />
-      </CardContent>
-      )}
       {loading ? (null) : (
       <CardActions disableSpacing > 
         <IconButton >
           <ShareIcon />
         </IconButton>
-        <ItemCount stock={product.stock} initial={1} onAdd={onAdd} />
+        {cartProducts.find(cartProduct => cartProduct.id === product.id) ? (
+          <Button variant="contained" sx={{ marginLeft: 16 }} component={Link} to={'/cart'}>Go to Cart</Button>
+        ) : (
+          <ItemCount stock={product.stock} initial={1} onAdd={onAdd} />
+        )}
       </CardActions>
       )}
     </Card>
+    </ThemeProvider>
   );
 }
 

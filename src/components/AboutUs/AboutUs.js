@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 function AboutUs() {
   return (
     <Container maxWidth="sm">
-      <Card sx={{ maxWidth: 500, marginTop: 10, boxShadow: 5 }}>
+      <Card sx={{ maxWidth: 500, marginTop: 10, boxShadow: 5, marginBottom: 18, }}>
         <CardMedia
           component="img"
           height="300"

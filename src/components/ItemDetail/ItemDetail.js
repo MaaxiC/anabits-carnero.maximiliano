@@ -12,29 +12,37 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { useState } from 'react';
+import { useContext } from 'react';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { ThemeProvider } from '@mui/material/styles';
+import ThemeContext from '../../context/ThemeContext';
+import CartContext from '../../context/CartContext';
+import { useParams } from 'react-router-dom';
 
 
 const ItemDetail = ({item}) => {
+  const { id } = useParams();
+
   const {title, price, image, alt, stock, description}  = item
-  const [hidden, setHidden] = useState(false);
-      
-  const onAdd = (count, setCount) => {
-    alert(`Agregaste ${count} productos`);
-    setCount(1);
-    setHidden(true);
+
+  const { theme } = useContext(ThemeContext);
+  const { cartProducts, addProductToCart } = useContext(CartContext);
+
+  const onAdd = (count) => {
+    addProductToCart(item);
   }
 
   return (
-    <Container sx={{  marginTop: 7 }} >
-      <Card sx={{  border: 1, borderRadius: 5, boxShadow: 5 }} >
+    <ThemeProvider theme={theme}>
+    <Container sx={{  marginTop: 7, marginBottom: 35 }} >
+      <Card sx={{  borderRadius: 3, boxShadow: 5 }} >
         <div className='card-header'>
           <CardMedia
             component="img"
+            height="500"
             image={image}
             alt={alt}
           />
@@ -53,18 +61,23 @@ const ItemDetail = ({item}) => {
               </Typography>
             </CardContent>
             <div className='card'>
-              <CreditCardIcon sx={{ marginLeft: 3, marginRight: 3,  color: '#573391' }}  />
+              <CreditCardIcon sx={{ marginLeft: 3, marginRight: 3 }} color= 'primary' />
               Credit Card payment accepted
             </div>
             <CardActions sx={{  marginLeft: -4, marginRight: 5 }} > 
-              <LocalShippingIcon sx={{ marginLeft: 6, marginRight: 3,  color: '#573391' }} />
+              <LocalShippingIcon sx={{ marginLeft: 6, marginRight: 3 }} color= 'primary' />
               Free Shipping
-              {hidden ? <Button variant="contained" sx={{ marginLeft: 4, marginRight: -1 }} component={Link} to={'/cart'}>Go to Cart</Button> : <ItemCount stock={stock} initial={1} onAdd={onAdd}/> }
+              {cartProducts.find(cartProduct => cartProduct.id === id) ? (
+                <Button variant="contained" sx={{ marginLeft: 4, marginRight: -1 }} component={Link} to={'/cart'}>Go to Cart</Button>
+              ) : (
+                <ItemCount stock={stock} initial={1} onAdd={onAdd}/> 
+              )}
             </CardActions>
           </div>
         </div>
         </Card>
     </Container>
+    </ThemeProvider>
   );
 }
   

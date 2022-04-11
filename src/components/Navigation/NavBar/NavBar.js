@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -26,7 +26,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LightModeIcon from '@mui/icons-material/LightMode';
 import SearchWidget from '../SearchWidget/SearchWidget';
 import CartWidget from '../CartWidget/CartWidget';
 import { Link } from 'react-router-dom';
@@ -37,6 +36,9 @@ import Collapse from '@mui/material/Collapse';
 import MicIcon from '@mui/icons-material/Mic';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import SpeakerIcon from '@mui/icons-material/Speaker';
+import { Container } from '@mui/material';
+import ThemeSwitch from './ThemeSwitch';
+import ThemeContext from '../../../context/ThemeContext';
 
 
 const drawerWidth = 240;
@@ -136,8 +138,9 @@ function NavBar() {
     setSubMenu(!subMenu);
   };
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const { theme } = useContext(ThemeContext);
+
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -147,7 +150,7 @@ function NavBar() {
     setOpen(false);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -186,8 +189,8 @@ function NavBar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position='fixed' open={open}>
-        <Toolbar>
+      <AppBar position='fixed' open={open} theme={theme} >
+        <Toolbar >
           <IconButton
             color='inherit'
             aria-label='open drawer'
@@ -203,7 +206,7 @@ function NavBar() {
           <Typography variant='h5' noWrap component={Link} to={'/'} color='white' sx={{ marginRight: 4, textDecoration: 'none' }} >
             Anabits
           </Typography>
-          <img src='/logo-soundwaves.png' alt='img-logo' width='70px'/>
+          <img src='/logo-soundwaves-modified.png' alt='img-logo' width='70px' />
           <SearchWidget/>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -224,14 +227,14 @@ function NavBar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer variant='permanent' open={open}>
-        <DrawerHeader>
+      <Drawer variant='permanent' open={open} >
+        <DrawerHeader >
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
+        <List >
           {['Home', 'Favorites'].map((text, index) => (
             <ListItemButton
               component={Link} 
@@ -272,8 +275,8 @@ function NavBar() {
           <ListItemText primary="Category" />
           {subMenu ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={subMenu} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
+          <Collapse in={subMenu} timeout="auto" unmountOnExit >
+            <List component="div" disablePadding >
               <ListItemButton 
                 sx={{ pl: 2.5 }}
                 component={Link} 
@@ -344,26 +347,15 @@ function NavBar() {
           ))}
         </List>
         <Box sx={{ flexGrow: 1 }} />
-        <List>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >   
-              <LightModeIcon />
-            </ListItemIcon>
-            <ListItemText primary={'Theme Mode'} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </List>
+        {open ? (
+          <Container sx={{ marginLeft: 0 }}>
+            <ThemeSwitch/>
+          </Container>
+        ) : (
+          <Container sx={{ marginLeft: -2.5 }}>
+            <ThemeSwitch/>
+          </Container>
+        )}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 1 }}>
         <DrawerHeader />

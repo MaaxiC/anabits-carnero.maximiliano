@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,31 +8,21 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Badge from '@mui/material/Badge';
 import '../ItemCount/ItemCount.css';
 import IconButton from '@mui/material/IconButton';
-import Notification from '../Notification/Notification'
+import { ThemeProvider } from '@mui/material/styles';
+import ThemeContext from '../../context/ThemeContext';
+
 
 const ItemCount = ({stock, initial, onAdd}) => {
     const [count, setCount] = useState(1);
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-    }
-  
-      setOpen(false);
-    };
-
-    const handleClick = () => {
-        setOpen(true);
-      };
+    const { theme } = useContext(ThemeContext);
 
     const Alert = () => {
-        handleClick();
-        onAdd(count, setCount);
+        onAdd(count);
     }
 
     return (
+        <ThemeProvider theme={theme}>
         <div className='button-group'>
             <ButtonGroup>
                 <Button
@@ -64,9 +54,9 @@ const ItemCount = ({stock, initial, onAdd}) => {
                         </Badge>
                     </IconButton>
                 </div>
-                <Notification open={open} handleClose={handleClose} />
             </ButtonGroup>
         </div>
+        </ThemeProvider>
     );
 }
 

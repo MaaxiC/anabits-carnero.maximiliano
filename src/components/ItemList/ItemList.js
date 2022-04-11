@@ -11,7 +11,6 @@ const ItemList = () => {
     const [items, setItems] = useState([]);
     
     const filterProductByCategory = (array, category) => {
-        console.log('array: ', array , 'category:', category)
         return array.map( (product, i) => {
             if( product.category === category ) {
                 return setItems(items => [...items, product]);
