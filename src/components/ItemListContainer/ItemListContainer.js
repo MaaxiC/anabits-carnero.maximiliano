@@ -25,7 +25,7 @@ const ItemListContainer = () => {
       {category ? <ItemList /> : (
         <>
         <ItemList />
-        <Container sx={{ marginTop: 8 }} >
+        <Container maxWidth="lg" sx={{  marginTop: 4 }}>
           <h2>Our Brands</h2>
           <ImageList
             sx={{ width: 1200, height: 500, marginBottom: -25, borderRadius: 3, boxShadow: 5}}

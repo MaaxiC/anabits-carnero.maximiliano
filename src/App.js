@@ -16,6 +16,7 @@ import CartPage from './pages/Cart';
 import { ThemeProvider } from './context/ThemeContext';
 import { CartProvider } from './context/CartContext';
 
+
 function App() {
   return (
     <div className='App'>

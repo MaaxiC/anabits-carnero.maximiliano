@@ -3,6 +3,8 @@ import Item from '../Item/Item';
 import '../ItemList/ItemList.css';
 import { mockItems } from '../../data/Data';
 import { useParams } from 'react-router-dom';
+import db from '../../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 
 const ItemList = () => {
@@ -20,11 +22,20 @@ const ItemList = () => {
         })
     }
 
-    const getItems = () => {
+    const getItems = async () => {
         setLoading(false);
-        return new Promise((resolve, reject) => {
-            return resolve(mockItems);
-        });
+        const itemCollection = collection(db, 'products');
+//        const itemCollection = query(collection(db, 'products'), where('category', '==', category));
+        const productsSnapshot = await getDocs(itemCollection)
+        const productList = productsSnapshot.docs.map((doc) => {
+            let product = doc.data();
+            product.id = doc.id;
+            return product;
+        })
+        return productList;
+        // return new Promise((resolve, reject) => {
+        //     return resolve(mockItems);
+        // });
     }
   
     useEffect( () => {

@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
-    const { cartProducts, total, removeProduct } = useContext(CartContext);
+    const { cartProducts, total, removeProduct, clearCart } = useContext(CartContext);
     const { theme } = useContext(ThemeContext);
 
     return (
@@ -31,6 +31,14 @@ const Cart = () => {
             </Typography>
             {total > 0 ? (
             <>
+            <div className='buttonfromcart'>
+                <Button 
+                    sx={{ marginBottom: 2 }}
+                    onClick={() => clearCart()}
+                >
+                    Empty Cart
+                </Button>
+            </div>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -71,7 +79,7 @@ const Cart = () => {
                     </TableBody>
                 </Table>        
             </TableContainer>
-            <div className='buynow'>
+            <div className='buttonfromcart'>
                 <Button variant="contained" sx={{ marginTop: 3 }}>Buy Now</Button>
             </div>
             </>

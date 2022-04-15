@@ -5,7 +5,7 @@
     align-items: center;
 }
 
-.buynow {
+.buttonfromcart {
     display: flex;
     justify-content: right;
 }

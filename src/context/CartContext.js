@@ -47,12 +47,19 @@ const CartProvider = ({children}) => {
         setTotal(total + (unitPrice * units));
     }
 
+    const clearCart = () => {
+        setCartProducts([]);
+        setTotal(0);
+        setNumItems(0);
+    }
+
     const data = {
         cartProducts,
-        addProductToCart,
         total,
+        numItems,
+        addProductToCart,
         removeProduct,
-        numItems
+        clearCart
     }
 
     return (
