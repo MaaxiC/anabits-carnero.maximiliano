@@ -31,10 +31,12 @@ const CartProvider = ({children}) => {
             alt:  product.alt,
             quantity: count,
         };
-        !exist && setCartProducts(cartProducts => [...cartProducts, array]);
-        !exist && setNumItems(numItems + array.quantity);
-        !exist && handleClick();
-        !exist && calculeTotalPrice(array.price, array.quantity);
+        if (!exist) {
+            setCartProducts(cartProducts => [...cartProducts, array]);
+            setNumItems(numItems + array.quantity);
+            handleClick();
+            calculeTotalPrice(array.price, array.quantity);
+        }
     }    
 
     const removeProduct = (product) => {
