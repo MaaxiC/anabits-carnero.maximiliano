@@ -23,13 +23,15 @@ const CartProvider = ({children}) => {
     };
 
     const addProductToCart = (product, count) => {
-        let exist = cartProducts.find(cartProduct => cartProduct.id === product.id);
+        const {id, title, price, image, alt}  = product
+
+        let exist = cartProducts.find(cartProduct => cartProduct.id === id);
         let array = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            image: product.image,
-            alt:  product.alt,
+            id: id,
+            title: title,
+            price: price,
+            image: image,
+            alt: alt,
             quantity: count,
         };
         if (!exist) {
