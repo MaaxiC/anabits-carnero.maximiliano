@@ -28,7 +28,7 @@ const ItemListContainer = () => {
         <Container maxWidth="lg" sx={{  marginTop: 4 }}>
           <h2>Our Brands</h2>
           <ImageList
-            sx={{ width: 1200, height: 500, marginBottom: -25, borderRadius: 3, boxShadow: 5}}
+            sx={{ width: 1200, height: 500, marginBottom: -15, borderRadius: 3, boxShadow: 5}}
             variant="quilted"
             cols={4}
             rowHeight={121}

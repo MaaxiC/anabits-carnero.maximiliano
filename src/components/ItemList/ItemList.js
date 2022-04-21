@@ -4,8 +4,8 @@ import '../ItemList/ItemList.css';
 import { mockItems } from '../../data/Data';
 import { useParams } from 'react-router-dom';
 import db from '../../firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-
+import { collection, getDocs } from 'firebase/firestore';
+//import { query, where } from 'firebase/firestore';
 
 const ItemList = () => {
     const { category } = useParams();

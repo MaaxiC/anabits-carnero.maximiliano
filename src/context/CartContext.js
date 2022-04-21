@@ -6,6 +6,7 @@ const CartContext = createContext();
 
 const CartProvider = ({children}) => {
     const [cartProducts, setCartProducts] = useState([]);
+//    const [cartProducts, setCartProducts] = useState(JSON.parse(localStorage.getItem("products")) || []);
     const [open, setOpen] = useState(false);
     const [total, setTotal] = useState(0);
     const [numItems, setNumItems] = useState(0);
@@ -36,6 +37,7 @@ const CartProvider = ({children}) => {
             setNumItems(numItems + array.quantity);
             handleClick();
             calculeTotalPrice(array.price, array.quantity);
+//            localStorage.setItem("products", JSON.stringify([...cartProducts, array]))
         }
     }    
 
