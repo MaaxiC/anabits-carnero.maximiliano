@@ -30,10 +30,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import LinearProgress from '@mui/material/LinearProgress';
 
-
 const Cart = () => {
     const { cartProducts, total, removeProduct, clearCart } = useContext(CartContext);
     const [submitLoading, setSubmitLoading] = useState(false);
+    const [formError, setFormError] = useState(false);
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -60,7 +60,6 @@ const Cart = () => {
 
     const handleChange = (e) => {
         const {value, id} = e.target
-
         setFormData({
             ...formData,
             [id]: value
@@ -73,11 +72,17 @@ const Cart = () => {
         setSuccessOrder(orderDoc.id)
     }
 
+    const emailRegex = new RegExp('^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$');
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        let prevOrder = {...order, buyer: formData}
-        setOrder({...order, buyer: formData});
-        pushOrder(prevOrder);
+        if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.phone.length !== 11 || !emailRegex.test(formData.email)) {
+            setFormError(true)
+        } else {
+            let prevOrder = {...order, buyer: formData}
+            setOrder({...order, buyer: formData})
+            pushOrder(prevOrder)
+        }
     }
 
     useEffect( () => {
@@ -204,6 +209,8 @@ const Cart = () => {
                                         id="firstName"
                                         label="First Name"
                                         variant="filled"
+                                        error={formError && formData.firstName.trim() === ""}
+                                        helperText={formError && formData.firstName.trim() === "" ? "Invalid Value" : " "}
                                         onChange={handleChange}
                                         value={formData.firstName}
                                     />
@@ -212,6 +219,8 @@ const Cart = () => {
                                         id="lastName"
                                         label="Last Name"
                                         variant="filled"
+                                        error={formError && formData.lastName.trim() === ""}
+                                        helperText={formError && formData.lastName.trim() === "" ? "Invalid Value" : " "}
                                         onChange={handleChange}
                                         value={formData.lastName}
                                     />
@@ -221,6 +230,8 @@ const Cart = () => {
                                         label="Phone"
                                         type="number"
                                         variant="filled"
+                                        error={formError && formData.phone.length !== 11}
+                                        helperText={formError && formData.phone.length !== 11 ? "Invalid Value" : "Inicia con 0 y sin 15"}
                                         onChange={handleChange}
                                         value={formData.phone}
                                     />
@@ -229,6 +240,8 @@ const Cart = () => {
                                         id="email"
                                         label="Email"
                                         variant="filled"
+                                        error={formError && !emailRegex.test(formData.email)}
+                                        helperText={formError && !emailRegex.test(formData.email) ? "Invalid Value" : " "}
                                         onChange={handleChange}
                                         value={formData.email}
                                     />
