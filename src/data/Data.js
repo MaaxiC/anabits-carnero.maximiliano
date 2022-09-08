@@ -1,5 +1,4 @@
-
-export const mockItems = [{
+const MockItems = [{
     id: '1',
     title: 'JBL Live 460NC',
     price: 110,
@@ -80,3 +79,5 @@ export const mockItems = [{
     category: 'speakers',
   },
 ]
+
+export { MockItems }

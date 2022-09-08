@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Item from '../Item/Item';
 import '../ItemList/ItemList.css';
-import { mockItems } from '../../data/Data';
+import { MockItems } from '../../data/Data';
 import { useParams } from 'react-router-dom';
 import db from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
@@ -53,7 +53,7 @@ const ItemList = () => {
         { category ? <h2>{ category.charAt(0).toUpperCase() + category.slice(1) }</h2> : <h2>Products</h2> }
         <div className='container-cards'>
             { loading ? (
-                mockItems.map( (item, i) => { 
+                MockItems.map( (item, i) => { 
                     if (category) {
                         if( item.category === category ) {
                             return ( <Item key={i} loading={loading}/> )
