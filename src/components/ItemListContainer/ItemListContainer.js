@@ -4,7 +4,7 @@ import '../ItemListContainer/ItemListContainer.css';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Container from '@mui/material/Container';
-import { itemData } from '../../data/brands';
+import { ItemData } from '../../data/brands';
 import { useParams } from 'react-router-dom';
 
 
@@ -33,7 +33,7 @@ const ItemListContainer = () => {
             cols={4}
             rowHeight={121}
           >
-            {itemData.map((item) => (
+            {ItemData.map((item) => (
               <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
                 <img
                   {...srcset(item.img, 121, item.rows, item.cols)}

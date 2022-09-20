@@ -1,5 +1,4 @@
-
-export const itemData = [
+const ItemData = [
     {
         img: 'https://musicaymercado.org/wp-content/uploads/2018/07/Sennheiser-logo-e1532206258872-1440x564_c.jpg',
         title: 'Sennheiser',
@@ -38,4 +37,6 @@ export const itemData = [
         img: 'https://static.wixstatic.com/media/83497e_0a1ce356fe224654861a53977a9b5045.png/v1/fill/w_1600,h_1066,al_c,q_90/file.jpg',
         title: 'Shure',
     },
-];
+]
+
+export { ItemData }
