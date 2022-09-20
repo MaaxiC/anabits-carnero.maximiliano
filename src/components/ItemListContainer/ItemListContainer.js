@@ -4,7 +4,7 @@ import '../ItemListContainer/ItemListContainer.css';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Container from '@mui/material/Container';
-import { itemData } from '../../Data/Brands';
+import { itemData } from '../../data/brands';
 import { useParams } from 'react-router-dom';
 
 
