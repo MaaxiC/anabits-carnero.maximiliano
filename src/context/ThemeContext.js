@@ -8,8 +8,19 @@ const ThemeProvider = ({children}) => {
     const [theme, setTheme] = useState(false);
 
     useEffect( () => {
+        const defaultTheme = createTheme({
+            palette: {
+            primary: {
+                main: '#573391',
+            },
+            secondary: {
+                main: '#5902EC',
+            },
+            },
+        });
+
         setTheme(defaultTheme);
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []) 
 
     const defaultTheme = createTheme({
         palette: {

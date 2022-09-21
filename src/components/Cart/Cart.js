@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import Container from '@mui/material/Container';
 import CartContext from '../../context/CartContext';
 import Table from '@mui/material/Table';
@@ -69,6 +69,7 @@ const Cart = () => {
     const pushOrder = async(prevOrder) => {
         const orderFirebase = collection(db, 'orders');
         const orderDoc = await addDoc(orderFirebase, prevOrder);
+        setSubmitLoading(false)
         setSuccessOrder(orderDoc.id)
     }
 
@@ -81,21 +82,10 @@ const Cart = () => {
         } else {
             let prevOrder = {...order, buyer: formData}
             setOrder({...order, buyer: formData})
+            setSubmitLoading(true)
             pushOrder(prevOrder)
         }
     }
-
-    useEffect( () => {
-        setSubmitLoading(true);
-        let timer = setTimeout(() => {
-             setSubmitLoading(false);
-        }, 2000);
-
-        return () => {
-            clearTimeout(timer);
-        };
-        
-    }, [order])
 
     return (
         <ThemeProvider theme={theme}>
@@ -204,7 +194,7 @@ const Cart = () => {
                                     User Info
                                 </Typography>
                                 <Box
-                                    component="form"
+                                    component="div"
                                     sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }}
                                     noValidate
                                     autoComplete="off"

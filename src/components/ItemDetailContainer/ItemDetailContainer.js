@@ -26,9 +26,6 @@ const ItemDetailContainer = () => {
     //     })
     // }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
     const handleToggle = () => {
         setOpen(!open);
     };
@@ -53,17 +50,10 @@ const ItemDetailContainer = () => {
     useEffect( () => {
         setLoading(true);
         handleToggle();
-        let timer = setTimeout(() => {
-            getDetail();
+        getDetail();
 //          getDetail().then( (data) => {
 //                 filterProductById(data, id);
 //            })
-        }, 1000);
-
-        return () => {
-            clearTimeout(timer);
-        };
-
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
@@ -72,7 +62,9 @@ const ItemDetailContainer = () => {
                     <Backdrop
                         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                         open={open}
-                        onClick={handleClose}
+                        onClick={() => {
+                            setOpen(false);
+                        }}
                     >
                         <CircularProgress />
                     </Backdrop>
