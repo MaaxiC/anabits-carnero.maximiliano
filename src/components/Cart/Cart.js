@@ -72,8 +72,8 @@ const Cart = () => {
         setSuccessOrder(orderDoc.id)
     }
 
-    const emailRegex = new RegExp('^[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$');
-
+    const emailRegex = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formData.firstName.trim() === '' || formData.lastName.trim() === '' || formData.phone.length !== 11 || !emailRegex.test(formData.email)) {

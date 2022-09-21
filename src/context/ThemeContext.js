@@ -9,8 +9,8 @@ const ThemeProvider = ({children}) => {
 
     useEffect( () => {
         setTheme(defaultTheme);
-    }, [])
-    
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     const defaultTheme = createTheme({
         palette: {
         primary: {

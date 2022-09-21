@@ -59,7 +59,7 @@ const ItemDetailContainer = () => {
 //                 filterProductById(data, id);
 //            })
         }, 1000);
-    }, [id])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
     
     return (
         <div className='container-detail' >
