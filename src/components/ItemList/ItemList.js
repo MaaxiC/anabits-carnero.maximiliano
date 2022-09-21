@@ -41,11 +41,16 @@ const ItemList = () => {
     useEffect( () => {
         setItems([]);
         setLoading(true);
-        setTimeout(() => {
+        let timer = setTimeout(() => {
             getItems().then( (data) => {
                 category ? filterProductByCategory(data, category) : setItems(data) 
             })
         }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+
     }, [category])
   
     return (

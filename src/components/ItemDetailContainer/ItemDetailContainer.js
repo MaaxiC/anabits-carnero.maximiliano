@@ -53,12 +53,17 @@ const ItemDetailContainer = () => {
     useEffect( () => {
         setLoading(true);
         handleToggle();
-        setTimeout(() => {
+        let timer = setTimeout(() => {
             getDetail();
 //          getDetail().then( (data) => {
 //                 filterProductById(data, id);
 //            })
         }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
     
     return (

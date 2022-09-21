@@ -87,9 +87,14 @@ const Cart = () => {
 
     useEffect( () => {
         setSubmitLoading(true);
-        setTimeout(() => {
+        let timer = setTimeout(() => {
              setSubmitLoading(false);
         }, 2000);
+
+        return () => {
+            clearTimeout(timer);
+        };
+        
     }, [order])
 
     return (
